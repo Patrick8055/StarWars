@@ -6,7 +6,7 @@
     <ul id='film-list' class='list-unstyled'>
       @foreach($films as $film)
       <li>
-        <a class="link-light" href="/films/{{filter_var($film['url'], FILTER_SANITIZE_NUMBER_INT)}}"><h3>{{$film['title']}}</h3></a>
+        <a class="link-light" href="{{str_replace('http://swapi.dev/api', '', $film['url'])}}"><h3>{{$film['title']}}</h3></a>
         <p>{{$film['opening_crawl']}}</p>
       </li>
       @endforeach

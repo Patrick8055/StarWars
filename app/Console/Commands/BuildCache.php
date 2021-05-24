@@ -44,8 +44,6 @@ class BuildCache extends Command
     // functions for all duplicate code
     // validate the data from the api calls and add exceptions and errors
     // adapt variable names to php convention (snake_case vs camelCase)
-    // check resources for holes, starships are not numbered continuously (numbers are skipped in the url while still being all 36, last one is id 75)
-    // insted of saving the counts, save an array of all valid ids from the urls to avoid the issue of skipped numbers
 
     Cache::flush();
 
@@ -93,6 +91,7 @@ class BuildCache extends Command
       }
     }
     Cache::put('species_ids', $species_ids);
+
 
     $planet_ids = [];
     $planets_pages = [];
@@ -147,4 +146,23 @@ class BuildCache extends Command
     Cache::put('starship_ids', $starship_ids);
 
   }
+
+  // public function renameLater($category){
+  //   $categoryIds = [];
+  //   $categoryPages = [];
+  //   array_push($categoryPages, Http::get('https://swapi.dev/api/' . $category)->json());
+  //   $i = 0;
+  //   while($categoryPages[$i]['next']){
+  //     array_push($categoryPages, Http::get($categoryPages[$i]['next'])->json());
+  //     $i++;
+  //   }
+  //
+  //   foreach($categoryPages as $page){
+  //     foreach($page['results'] as $result){
+  //       Cache::put($result['url'], $result);
+  //       array_push($categoryIds, filter_var($result['url'], FILTER_SANITIZE_NUMBER_INT));
+  //     }
+  //   }
+  //   Cache::put(substr($category, 0, -1) . 'Ids', $vehicle_ids);
+  // }
 }

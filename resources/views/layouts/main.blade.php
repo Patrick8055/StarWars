@@ -27,7 +27,7 @@
       <nav class="navbar navbar-expand-lg justify-content-center">
         <div class="navbar-nav">
           <a class="nav-item nav-link h4" href="/films">Films</a>
-          <a class="nav-item nav-link h4" href="/characters">Characters</a>
+          <a class="nav-item nav-link h4" href="/people">Characters</a>
           <a class="nav-item nav-link h4" href="/species">Species</a>
           <a class="nav-item nav-link h4" href="/planets">Planets</a>
           <a class="nav-item nav-link h4" href="/starships">Starships</a>

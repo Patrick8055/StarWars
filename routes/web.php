@@ -20,9 +20,8 @@ Route::get('/', function () {
 Route::get('/films', [App\Http\Controllers\FilmController::class, 'index']);
 Route::get('/films/{id}', [App\Http\Controllers\FilmController::class, 'show']);
 
-// maybe change characters to people to match the api urls and leave 'characters' only when neccesary like when getting characters from films
-Route::get('/characters', [App\Http\Controllers\PeopleController::class, 'index']);
-Route::get('/characters/{id}', [App\Http\Controllers\PeopleController::class, 'show']);
+Route::get('/people', [App\Http\Controllers\PeopleController::class, 'index']);
+Route::get('/people/{id}', [App\Http\Controllers\PeopleController::class, 'show']);
 
 Route::get('/species', [App\Http\Controllers\SpeciesController::class, 'index']);
 Route::get('/species/{id}', [App\Http\Controllers\SpeciesController::class, 'show']);

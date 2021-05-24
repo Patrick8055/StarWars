@@ -20,7 +20,7 @@
     <div>
       <p>Characters:
         @foreach($characters as $character)
-        <a href="/characters/{{filter_var($character['url'], FILTER_SANITIZE_NUMBER_INT)}}">{{$character['name'] . ", "}}</a>
+        <a href="{{str_replace('http://swapi.dev/api', '', $character['url'])}}">{{$character['name'] . ", "}}</a>
         @endforeach
       </p>
     </div>
