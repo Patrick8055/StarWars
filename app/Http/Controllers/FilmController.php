@@ -9,7 +9,7 @@ class FilmController extends Controller
 {
     public function index()
     {
-      $films = $this->get_all('films', 'film_ids');
+      $films = $this->getAll('films', 'filmsIds');
 
       return view('list_pages/films', compact('films'));
     }
@@ -17,12 +17,12 @@ class FilmController extends Controller
     public function show($id)
     {
       $film = Cache::get('http://swapi.dev/api/films/' . $id .'/');
-      $characters = $this->get_associated($film, 'characters');
-      $species = $this->get_associated($film, 'species');
-      $planets = $this->get_associated($film, 'planets');
-      $starships = $this->get_associated($film, 'starships');
-      $vehicles = $this->get_associated($film, 'vehicles');
+      $filmCharacters = $this->getAssociated($film, 'characters');
+      $filmSpecies = $this->getAssociated($film, 'species');
+      $filmPlanets = $this->getAssociated($film, 'planets');
+      $filmStarships = $this->getAssociated($film, 'starships');
+      $filmVehicles = $this->getAssociated($film, 'vehicles');
 
-      return view('detail_pages/film', compact('film', 'characters', 'species', 'planets', 'starships', 'vehicles'));
+      return view('detail_pages/film', compact('film', 'filmCharacters', 'filmSpecies', 'filmPlanets', 'filmStarships', 'filmVehicles'));
     }
 }

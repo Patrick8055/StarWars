@@ -6,58 +6,62 @@
     <h1>Episode {{$film['episode_id']}}: {{$film['title']}}</h1>
     <div class="row">
       <div>
-        Director: {{$film['director']}}
+        <u><b>Director:</b></u> {{$film['director']}}
       </div>
     </div>
     <div class="row">
       <div>
-        Producer: {{$film['producer']}}
+        <u><b>Producer:</b></u> {{$film['producer']}}
       </div>
     </div>
     <hr>
     <p>{{$film['opening_crawl']}}</p>
     <hr>
     <div>
-      <p>Characters:
-        @foreach($characters as $character)
-        <a href="{{str_replace('http://swapi.dev/api', '', $character['url'])}}">{{$character['name'] . ", "}}</a>
+      <p><u><b>Characters:</b></u>
+        @foreach($filmCharacters as $character)
+        <a class="link-light text-decoration-none" href="{{str_replace('http://swapi.dev/api', '', $character['url'])}}">{{$character['name'] . ", "}}</a>
         @endforeach
       </p>
     </div>
+    <hr>
     <div>
-      <p>Species:
-        @foreach($species as $s)
-        {{$s['name'] . ", "}}
+      <p><u><b>Species:</b></u>
+        @foreach($filmSpecies as $oneSpecies)
+        <a class="link-light text-decoration-none" href="{{str_replace('http://swapi.dev/api', '', $oneSpecies['url'])}}">{{$oneSpecies['name'] . ", "}}</a>
         @endforeach
       </p>
     </div>
+    <hr>
     <div>
-      <p>Planets:
-        @foreach($planets as $planet)
-        {{$planet['name'] . ", "}}
+      <p><u><b>Planets:</b></u>
+        @foreach($filmPlanets as $planet)
+        <a class="link-light text-decoration-none" href="{{str_replace('http://swapi.dev/api', '', $planet['url'])}}">{{$planet['name'] . ", "}}</a>
         @endforeach
       </p>
     </div>
+    <hr>
     <div>
-      <p>Vehicles:
-        @foreach($vehicles as $vehicle)
-        {{$vehicle['name'] . ", "}}
+      <p><u><b>Vehicles:</b></u>
+        @foreach($filmVehicles as $vehicle)
+        <a class="link-light text-decoration-none" href="{{str_replace('http://swapi.dev/api', '', $vehicle['url'])}}">{{$vehicle['name'] . ", "}}</a>
         @endforeach
       </p>
     </div>
+    <hr>
     <div>
-      <p>Starships:
-        @foreach($starships as $starship)
-        {{$starship['name'] . ", "}}
+      <p><u><b>Starships:</b></u>
+        @foreach($filmStarships as $starship)
+        <a class="link-light text-decoration-none" href="{{str_replace('http://swapi.dev/api', '', $starship['url'])}}">{{$starship['name'] . ", "}}</a>
         @endforeach
       </p>
     </div>
+    <hr>
     <div class="row">
       <div class="">
-        Release date: {{$film['release_date']}}
+        <u><b>Release date:</b></u> {{$film['release_date']}}
       </div>
     </div>
-    <a href="/films">Back to Films overview</a>
   </div>
 </div>
 @endsection

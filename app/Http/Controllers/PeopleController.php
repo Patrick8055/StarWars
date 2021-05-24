@@ -9,7 +9,7 @@ class PeopleController extends Controller
 {
   public function index()
   {
-    $people = $this->get_all('people', 'character_ids');;
+    $people = $this->getAll('people', 'peopleIds');;
 
     return view('list_pages/people', compact('people'));
   }
@@ -18,10 +18,10 @@ class PeopleController extends Controller
   {
     $character = Cache::get('http://swapi.dev/api/people/' . $id .'/');
     $homeworld = Cache::get($character['homeworld']);
-    $films = $this->get_associated($character, 'films');
-    $species = $this->get_associated($character, 'species');
-    $starships = $this->get_associated($character, 'starships');
-    $vehicles = $this->get_associated($character, 'vehicles');
+    $films = $this->getAssociated($character, 'films');
+    $species = $this->getAssociated($character, 'species');
+    $starships = $this->getAssociated($character, 'starships');
+    $vehicles = $this->getAssociated($character, 'vehicles');
 
     return view('detail_pages/character', compact('character', 'homeworld', 'films', 'species', 'starships', 'vehicles'));
   }

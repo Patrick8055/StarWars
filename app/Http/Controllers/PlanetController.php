@@ -9,7 +9,7 @@ class PlanetController extends Controller
 {
   public function index()
   {
-    $planets = $this->get_all('planets', 'planet_ids');
+    $planets = $this->getAll('planets', 'planetsIds');
 
     return view('list_pages/planets', compact('planets'));
   }
@@ -17,8 +17,8 @@ class PlanetController extends Controller
   public function show($id)
   {
     $planet = Cache::get('http://swapi.dev/api/planets/' . $id .'/');
-    $residents = $this->get_associated($planet, 'residents');
-    $films = $this->get_associated($planet, 'films');
+    $residents = $this->getAssociated($planet, 'residents');
+    $films = $this->getAssociated($planet, 'films');
 
     return view('detail_pages/planet', compact('planet', 'residents', 'films'));
   }

@@ -9,7 +9,7 @@ class StarshipController extends Controller
 {
   public function index()
   {
-    $starships = $this->get_all('starships', 'starship_ids');
+    $starships = $this->getAll('starships', 'starshipsIds');
 
     return view('list_pages/starships', compact('starships'));
   }
@@ -17,8 +17,8 @@ class StarshipController extends Controller
   public function show($id)
   {
     $starship = Cache::get('http://swapi.dev/api/starships/' . $id .'/');
-    $films = $this->get_associated($starship, 'films');
-    $pilots = $this->get_associated($starship, 'pilots');
+    $films = $this->getAssociated($starship, 'films');
+    $pilots = $this->getAssociated($starship, 'pilots');
 
     return view('detail_pages/starship', compact('starship', 'films', 'pilots'));
   }

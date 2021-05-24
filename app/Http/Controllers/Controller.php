@@ -12,27 +12,27 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    // how should I name the functions and variables here??
     // TODO: validate and check for missing data, add exceptions and errors with try catch
+    // type hinting for the methods?
 
-    public function get_all($resource_name, $id_name)
+    public function getAll($resourceName, $categoryIds)
     {
-      $array = [];
-      $ids = Cache::get($id_name);
+      $results = [];
+      $ids = Cache::get($categoryIds);
       foreach($ids as $id){
-        $array[$id] = Cache::get('http://swapi.dev/api/' . $resource_name .'/' . $id . '/');
+        $results[$id] = Cache::get('http://swapi.dev/api/' . $resourceName .'/' . $id . '/');
       }
 
-      return $array;
+      return $results;
     }
 
-    public function get_associated($resource, $category)
+    public function getAssociated($resource, $category)
     {
-      $array = [];
+      $results = [];
       foreach($resource[$category] as $cat){
-        array_push($array, Cache::get($cat));
+        array_push($results, Cache::get($cat));
       }
 
-      return $array;
+      return $results;
     }
 }
