@@ -3,23 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 
 class PlanetController extends Controller
 {
   public function index()
   {
-    $planets = $this->getAll('planets', 'planetsIds');
+    $planets = $this->getAll('planets');
 
     return view('list_pages/planets', compact('planets'));
   }
 
   public function show($id)
   {
-    $planet = Cache::get('http://swapi.dev/api/planets/' . $id .'/');
-    $residents = $this->getAssociated($planet, 'residents');
-    $films = $this->getAssociated($planet, 'films');
+    $planet = $this->getOne('planets', $id);
+    $planetResidents = $this->getAssociated($planet, 'residents');
+    $planetFilms = $this->getAssociated($planet, 'films');
 
-    return view('detail_pages/planet', compact('planet', 'residents', 'films'));
+    return view('detail_pages/planet', compact('planet', 'planetResidents', 'planetFilms'));
   }
 }

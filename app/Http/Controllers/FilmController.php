@@ -3,20 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 
 class FilmController extends Controller
 {
     public function index()
     {
-      $films = $this->getAll('films', 'filmsIds');
+      $films = $this->getAll('films');
 
       return view('list_pages/films', compact('films'));
     }
 
     public function show($id)
     {
-      $film = Cache::get('http://swapi.dev/api/films/' . $id .'/');
+      $film = $this->getOne('films', $id);
       $filmCharacters = $this->getAssociated($film, 'characters');
       $filmSpecies = $this->getAssociated($film, 'species');
       $filmPlanets = $this->getAssociated($film, 'planets');

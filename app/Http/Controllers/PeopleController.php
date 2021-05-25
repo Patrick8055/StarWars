@@ -9,20 +9,20 @@ class PeopleController extends Controller
 {
   public function index()
   {
-    $people = $this->getAll('people', 'peopleIds');;
+    $people = $this->getAll('people');
 
     return view('list_pages/people', compact('people'));
   }
 
   public function show($id)
   {
-    $character = Cache::get('http://swapi.dev/api/people/' . $id .'/');
-    $homeworld = Cache::get($character['homeworld']);
-    $films = $this->getAssociated($character, 'films');
-    $species = $this->getAssociated($character, 'species');
-    $starships = $this->getAssociated($character, 'starships');
-    $vehicles = $this->getAssociated($character, 'vehicles');
+    $character = $this->getOne('people', $id);
+    $characterHomeworld = Cache::get($character['homeworld']);
+    $characterFilms = $this->getAssociated($character, 'films');
+    $characterSpecies = $this->getAssociated($character, 'species');
+    $characterStarships = $this->getAssociated($character, 'starships');
+    $characterVehicles = $this->getAssociated($character, 'vehicles');
 
-    return view('detail_pages/character', compact('character', 'homeworld', 'films', 'species', 'starships', 'vehicles'));
+    return view('detail_pages/character', compact('character', 'characterHomeworld', 'characterFilms', 'characterSpecies', 'characterStarships', 'characterVehicles'));
   }
 }

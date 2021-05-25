@@ -15,12 +15,17 @@ class Controller extends BaseController
     // TODO: validate and check for missing data, add exceptions and errors with try catch
     // type hinting for the methods?
 
-    public function getAll($resourceName, $categoryIds)
+    public function getOne($category, $id)
+    {
+      return Cache::get('http://swapi.dev/api/' . $category . '/' . $id .'/');
+    }
+
+    public function getAll($category)
     {
       $results = [];
-      $ids = Cache::get($categoryIds);
+      $ids = Cache::get($category . 'Ids');
       foreach($ids as $id){
-        $results[$id] = Cache::get('http://swapi.dev/api/' . $resourceName .'/' . $id . '/');
+        $results[$id] = Cache::get('http://swapi.dev/api/' . $category .'/' . $id . '/');
       }
 
       return $results;
