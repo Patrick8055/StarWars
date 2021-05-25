@@ -8,19 +8,27 @@ class FilmController extends Controller
 {
     public function index()
     {
-      $films = $this->getAll('films');
+      try {
+        $films = $this->getAll('films');
+      } catch (Exception $e) {
+        echo $e->getMessage(), "\n";
+      }
 
       return view('list_pages/films', compact('films'));
     }
 
-    public function show($id)
+    public function show(String $id)
     {
-      $film = $this->getOne('films', $id);
-      $filmCharacters = $this->getAssociated($film, 'characters');
-      $filmSpecies = $this->getAssociated($film, 'species');
-      $filmPlanets = $this->getAssociated($film, 'planets');
-      $filmStarships = $this->getAssociated($film, 'starships');
-      $filmVehicles = $this->getAssociated($film, 'vehicles');
+      try {
+        $film = $this->getOne('films', $id);
+        $filmCharacters = $this->getAssociated($film, 'characters');
+        $filmSpecies = $this->getAssociated($film, 'species');
+        $filmPlanets = $this->getAssociated($film, 'planets');
+        $filmStarships = $this->getAssociated($film, 'starships');
+        $filmVehicles = $this->getAssociated($film, 'vehicles');
+      } catch (Exception $e) {
+        echo $e->getMessage(), "\n";
+      }
 
       return view('detail_pages/film', compact('film', 'filmCharacters', 'filmSpecies', 'filmPlanets', 'filmStarships', 'filmVehicles'));
     }

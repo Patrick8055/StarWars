@@ -8,17 +8,25 @@ class StarshipController extends Controller
 {
   public function index()
   {
-    $starships = $this->getAll('starships');
+    try {
+      $starships = $this->getAll('starships');
+    } catch (Exception $e) {
+      echo $e->getMessage(), "\n";
+    }
 
     return view('list_pages/starships', compact('starships'));
   }
 
   public function show($id)
   {
-    $starship = $this->getOne('starships', $id);
-    $starshipFilms = $this->getAssociated($starship, 'films');
-    $starshipPilots = $this->getAssociated($starship, 'pilots');
-
+    try {
+      $starship = $this->getOne('starships', $id);
+      $starshipFilms = $this->getAssociated($starship, 'films');
+      $starshipPilots = $this->getAssociated($starship, 'pilots');
+    } catch (Exception $e) {
+      echo $e->getMessage(), "\n";
+    }
+    
     return view('detail_pages/starship', compact('starship', 'starshipFilms', 'starshipPilots'));
   }
 }

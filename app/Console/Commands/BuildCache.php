@@ -41,10 +41,9 @@ class BuildCache extends Command
   */
   public function handle()
   {
-    // validate the data from the api calls and add exceptions and errors
-
     Cache::flush();
 
+    // Add all resource categories from SWAPI to the cache.
     $this->putInCache('films');
     $this->putInCache('people');
     $this->putInCache('species');
@@ -53,25 +52,42 @@ class BuildCache extends Command
     $this->putInCache('vehicles');
   }
 
+  /**
+  * Request data from SWAPI for the given category and save it to the cache files.
+  */
   public function putInCache($category){
     $categoryIds = [];
     $categoryPages = [];
 
-    array_push($categoryPages, Http::get('https://swapi.dev/api/' . $category)->json());
+    // Throw an exception if a client or server error occurred, if no error occured throw() returns the response
+    array_push($categoryPages, Http::get('https://swapi.dev/api/' . $category)->throw()->json());
 
     $i = 0;
-    while($categoryPages[$i]['next']){
-      array_push($categoryPages, Http::get($categoryPages[$i]['next'])->json());
+    // Request the next page as long as there is one, and add it to the $categoryPages array.
+    while($categoryPages[$i]['next']) {
+      array_push($categoryPages, Http::get($categoryPages[$i]['next'])->throw()->json());
       $i++;
     }
 
-    foreach($categoryPages as $page){
-      foreach($page['results'] as $result){
-        Cache::put($result['url'], $result);
-        array_push($categoryIds, filter_var($result['url'], FILTER_SANITIZE_NUMBER_INT));
+    /**
+    * For each entry in each page save the response with it's url as key in the cache.
+    * Also save an array of all valid resource ids, which can later be used to access all valid resources via url.
+    */
+    foreach($categoryPages as $page) {
+      foreach($page['results'] as $result) {
+        //not sure about the following try catch blocks
+        try {
+          Cache::put($result['url'], $result);
+          array_push($categoryIds, filter_var($result['url'], FILTER_SANITIZE_NUMBER_INT));
+        } catch (Exception $e) {
+          echo $e->getMessage(), "\n";
+        }
       }
     }
-
-    Cache::put($category . 'Ids', $categoryIds);
+    try {
+      Cache::put($category . 'Ids', $categoryIds);
+    } catch (Exception $e) {
+      echo $e->getMessage(), "\n";
+    }
   }
 }
