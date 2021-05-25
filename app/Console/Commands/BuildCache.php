@@ -44,18 +44,18 @@ class BuildCache extends Command
     Cache::flush();
 
     // Add all resource categories from SWAPI to the cache.
-    $this->putInCache('films');
-    $this->putInCache('people');
-    $this->putInCache('species');
-    $this->putInCache('planets');
-    $this->putInCache('starships');
-    $this->putInCache('vehicles');
+    $this->saveInCache('films');
+    $this->saveInCache('people');
+    $this->saveInCache('species');
+    $this->saveInCache('planets');
+    $this->saveInCache('starships');
+    $this->saveInCache('vehicles');
   }
 
   /**
   * Request data from SWAPI for the given category and save it to the cache files.
   */
-  public function putInCache($category){
+  public function saveInCache($category){
     $categoryIds = [];
     $categoryPages = [];
 

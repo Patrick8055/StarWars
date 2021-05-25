@@ -22,7 +22,7 @@ class Controller extends BaseController
     {
 
       if (!Cache::get('http://swapi.dev/api/' . $category . '/' . $id .'/')) {
-        throw new Exception('Resource not found in cache.');
+        throw new Exception('The resource was not found in the cache.');
       }
       return Cache::get('http://swapi.dev/api/' . $category . '/' . $id .'/');
     }
@@ -35,14 +35,14 @@ class Controller extends BaseController
     public function getAll(String $category)
     {
       if (!Cache::get($category . 'Ids')) {
-        throw new Exception('Resource not found in cache.');
+        throw new Exception('The resource was not found in the cache.');
       }
 
       $results = [];
       $ids = Cache::get($category . 'Ids');
       foreach($ids as $id){
         if (!Cache::get('http://swapi.dev/api/' . $category .'/' . $id . '/')) {
-          throw new Exception('Resource not found in cache.');
+          throw new Exception('The resource was not found in the cache.');
         }
         $results[$id] = Cache::get('http://swapi.dev/api/' . $category .'/' . $id . '/');
       }
@@ -51,7 +51,7 @@ class Controller extends BaseController
     }
 
     /**
-    * Return with the resource associated films, characters, planets, speciess, vehicles or starships.
+    * Return with the resource associated films, characters, planets, speciess, vehicles, or starships.
     *
     * @return array
     */
@@ -60,7 +60,7 @@ class Controller extends BaseController
       $results = [];
       foreach($resource[$category] as $res){
         if (!Cache::get($res)) {
-          throw new Exception('Resource not found in cache.');
+          throw new Exception('The resource was not found in the cache.');
         }
         array_push($results, Cache::get($res));
       }
