@@ -29,16 +29,24 @@
     </div>
     <div>
       <p><u><b>People:</b></u>
+        @if(count($speciesPeople) === 0)
+        n/a
+        @else
         @foreach($speciesPeople as $character)
         <a class="link-light text-decoration-none" href="{{str_replace('http://swapi.dev/api', '', $character['url'])}}">{{$character['name'] . ", "}}</a>
         @endforeach
+        @endif
       </p>
     </div>
     <div>
       <p><u><b>Films:</b></u>
+        @if(count($speciesFilms) === 0)
+        n/a
+        @else
         @foreach($speciesFilms as $film)
         <a class="link-light text-decoration-none" href="{{str_replace('http://swapi.dev/api', '', $film['url'])}}">{{$film['title'] . ", "}}</a>
         @endforeach
+        @endif
       </p>
 
   </div>

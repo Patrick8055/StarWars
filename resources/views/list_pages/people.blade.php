@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
   <div class="justify-center text-center text-light">
-    <ul id='people-list' class='list-unstyled'>
+    <ul id='peopleList' class='list-unstyled'>
       @foreach($people as $character)
       <li>
         <!-- evtually change filter to str_replace way -->

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
   <div class="justify-center text-center text-light">
-    <ul id='vehicle-list' class='list-unstyled'>
+    <ul id='vehicleList' class='list-unstyled'>
       @foreach($vehicles as $vehicle)
       <li>
         @if($vehicle)

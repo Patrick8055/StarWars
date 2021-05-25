@@ -71,23 +71,14 @@ class BuildCache extends Command
 
     /**
     * For each entry in each page save the response with it's url as key in the cache.
-    * Also save an array of all valid resource ids, which can later be used to access all valid resources via url.
+    * Also save an array of all valid resource ids, which can later be used to access all resources via url.
     */
     foreach($categoryPages as $page) {
       foreach($page['results'] as $result) {
-        //not sure about the following try catch blocks
-        try {
-          Cache::put($result['url'], $result);
-          array_push($categoryIds, filter_var($result['url'], FILTER_SANITIZE_NUMBER_INT));
-        } catch (Exception $e) {
-          echo $e->getMessage(), "\n";
-        }
+        Cache::put($result['url'], $result);
+        array_push($categoryIds, filter_var($result['url'], FILTER_SANITIZE_NUMBER_INT));
       }
     }
-    try {
-      Cache::put($category . 'Ids', $categoryIds);
-    } catch (Exception $e) {
-      echo $e->getMessage(), "\n";
-    }
+    Cache::put($category . 'Ids', $categoryIds);
   }
 }

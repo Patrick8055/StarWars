@@ -51,7 +51,7 @@ class Controller extends BaseController
     }
 
     /**
-    * Return the with the resource associated films, characters, planets, speciess, vehicles or starships.
+    * Return with the resource associated films, characters, planets, speciess, vehicles or starships.
     *
     * @return array
     */

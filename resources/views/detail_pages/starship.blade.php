@@ -26,16 +26,24 @@
     </div>
     <div>
       <p><u><b>Films:</b></u>
+        @if(count($starshipFilms) === 0)
+        n/a
+        @else
         @foreach($starshipFilms as $film)
         <a class="link-light text-decoration-none" href="{{str_replace('http://swapi.dev/api', '', $film['url'])}}">{{$film['title'] . ", "}}</a>
         @endforeach
+        @endif
       </p>
     </div>
     <div>
       <p><u><b>Pilots:</b></u>
+        @if(count($starshipPilots) === 0)
+        n/a
+        @else
         @foreach($starshipPilots as $pilot)
         <a class="link-light text-decoration-none" href="{{str_replace('http://swapi.dev/api', '', $pilot['url'])}}">{{$pilot['name'] . ", "}}</a>
         @endforeach
+        @endif
       </p>
     </div>
   </div>
